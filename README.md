@@ -5,7 +5,7 @@
 - Bavly Remon
 - Omar Anwar
 
-##Demo 1
+## Demo 1
 Dr. Shalan's unisgned multiplier, found in "Lectures 19-21: RTL & ASM Charts" slide 5, was used while designing our circuit.
 
 ### Control Signals:
