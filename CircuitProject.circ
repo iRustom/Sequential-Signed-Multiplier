@@ -146,7 +146,9 @@
     <comp lib="0" loc="(1480,620)" name="Ground">
       <a name="facing" val="west"/>
     </comp>
-    <comp lib="0" loc="(170,1290)" name="Clock"/>
+    <comp lib="0" loc="(170,1290)" name="Clock">
+      <a name="label" val="clk"/>
+    </comp>
     <comp lib="0" loc="(1710,490)" name="Power"/>
     <comp lib="0" loc="(1710,520)" name="Ground"/>
     <comp lib="0" loc="(1710,610)" name="Splitter">
@@ -1585,11 +1587,11 @@
     </comp>
     <comp lib="4" loc="(3280,1080)" name="D Flip-Flop">
       <a name="appearance" val="logisim_evolution"/>
-      <a name="label" val="a1"/>
+      <a name="label" val="y1"/>
     </comp>
     <comp lib="4" loc="(3280,1360)" name="D Flip-Flop">
       <a name="appearance" val="logisim_evolution"/>
-      <a name="label" val="a0"/>
+      <a name="label" val="y0"/>
     </comp>
     <comp lib="4" loc="(460,840)" name="Register">
       <a name="appearance" val="logisim_evolution"/>
@@ -1620,7 +1622,7 @@
     <comp lib="5" loc="(4430,690)" name="7-Segment Display"/>
     <comp lib="5" loc="(4500,690)" name="7-Segment Display"/>
     <comp lib="8" loc="(1205,605)" name="Text">
-      <a name="text" val="B0"/>
+      <a name="text" val="b0"/>
     </comp>
     <comp lib="8" loc="(1215,515)" name="Text">
       <a name="text" val="Z"/>
@@ -1628,13 +1630,10 @@
     <comp lib="8" loc="(1240,245)" name="Text">
       <a name="text" val="LI (bar)"/>
     </comp>
-    <comp lib="8" loc="(1325,195)" name="Text">
+    <comp lib="8" loc="(1321,175)" name="Text">
       <a name="text" val="Lp"/>
     </comp>
-    <comp lib="8" loc="(1350,580)" name="Text">
-      <a name="text" val="CU"/>
-    </comp>
-    <comp lib="8" loc="(3666,1418)" name="Text">
+    <comp lib="8" loc="(3665,1415)" name="Text">
       <a name="text" val="Z_flag"/>
     </comp>
     <comp lib="8" loc="(3800,1420)" name="Text">
@@ -1646,17 +1645,17 @@
     <comp lib="8" loc="(395,945)" name="Text">
       <a name="text" val="LI"/>
     </comp>
-    <comp lib="8" loc="(810,25)" name="Text">
+    <comp lib="8" loc="(788,43)" name="Text">
+      <a name="text" val="LI (bar)"/>
+    </comp>
+    <comp lib="8" loc="(849,21)" name="Text">
       <a name="text" val="LI"/>
     </comp>
-    <comp lib="8" loc="(825,395)" name="Text">
+    <comp lib="8" loc="(859,479)" name="Text">
+      <a name="text" val="LI (bar)"/>
+    </comp>
+    <comp lib="8" loc="(863,424)" name="Text">
       <a name="text" val="LI"/>
-    </comp>
-    <comp lib="8" loc="(845,75)" name="Text">
-      <a name="text" val="EShift"/>
-    </comp>
-    <comp lib="8" loc="(855,475)" name="Text">
-      <a name="text" val="EShift"/>
     </comp>
     <comp lib="9" loc="(4370,690)" name="BCD_to_7_Segment_decoder"/>
     <comp lib="9" loc="(4430,690)" name="BCD_to_7_Segment_decoder"/>
@@ -2753,13 +2752,11 @@
     <wire from="(770,480)" to="(770,520)"/>
     <wire from="(770,520)" to="(780,520)"/>
     <wire from="(790,550)" to="(790,820)"/>
-    <wire from="(820,10)" to="(820,30)"/>
     <wire from="(820,30)" to="(820,40)"/>
     <wire from="(820,30)" to="(890,30)"/>
     <wire from="(820,40)" to="(820,420)"/>
     <wire from="(820,40)" to="(840,40)"/>
     <wire from="(820,420)" to="(830,420)"/>
-    <wire from="(830,410)" to="(830,420)"/>
     <wire from="(830,420)" to="(830,440)"/>
     <wire from="(830,440)" to="(830,450)"/>
     <wire from="(830,440)" to="(910,440)"/>
