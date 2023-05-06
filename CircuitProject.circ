@@ -7,7 +7,10 @@
       <a name="appearance" val="classic"/>
     </tool>
     <tool name="Power">
-      <a name="facing" val="south"/>
+      <a name="facing" val="west"/>
+    </tool>
+    <tool name="Ground">
+      <a name="facing" val="west"/>
     </tool>
   </lib>
   <lib desc="#Gates" name="1">
@@ -1135,18 +1138,9 @@
       <a name="fanout" val="7"/>
       <a name="incoming" val="7"/>
     </comp>
-    <comp lib="0" loc="(3970,820)" name="Power"/>
-    <comp lib="0" loc="(3970,850)" name="Ground">
+    <comp lib="0" loc="(4030,890)" name="Power">
       <a name="facing" val="west"/>
-    </comp>
-    <comp lib="0" loc="(3970,880)" name="Power">
-      <a name="facing" val="south"/>
-    </comp>
-    <comp lib="0" loc="(3990,890)" name="Splitter">
-      <a name="appear" val="right"/>
-      <a name="facing" val="west"/>
-      <a name="fanout" val="7"/>
-      <a name="incoming" val="7"/>
+      <a name="width" val="7"/>
     </comp>
     <comp lib="0" loc="(4070,900)" name="Splitter">
       <a name="fanout" val="7"/>
@@ -2590,10 +2584,6 @@
     <wire from="(390,360)" to="(460,360)"/>
     <wire from="(3930,450)" to="(3930,580)"/>
     <wire from="(3930,450)" to="(3950,450)"/>
-    <wire from="(3970,820)" to="(3970,830)"/>
-    <wire from="(3970,830)" to="(3970,840)"/>
-    <wire from="(3970,860)" to="(3970,870)"/>
-    <wire from="(3970,870)" to="(3970,880)"/>
     <wire from="(3990,440)" to="(4310,440)"/>
     <wire from="(3990,450)" to="(4320,450)"/>
     <wire from="(3990,460)" to="(4280,460)"/>
@@ -2601,7 +2591,6 @@
     <wire from="(3990,480)" to="(4260,480)"/>
     <wire from="(3990,490)" to="(4300,490)"/>
     <wire from="(3990,500)" to="(4290,500)"/>
-    <wire from="(3990,890)" to="(4040,890)"/>
     <wire from="(400,150)" to="(400,160)"/>
     <wire from="(400,150)" to="(440,150)"/>
     <wire from="(400,240)" to="(400,260)"/>
@@ -2611,6 +2600,7 @@
     <wire from="(400,380)" to="(400,400)"/>
     <wire from="(400,380)" to="(460,380)"/>
     <wire from="(400,870)" to="(460,870)"/>
+    <wire from="(4030,890)" to="(4040,890)"/>
     <wire from="(4050,920)" to="(4050,980)"/>
     <wire from="(4070,370)" to="(4390,370)"/>
     <wire from="(4070,380)" to="(4400,380)"/>
