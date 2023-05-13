@@ -7,6 +7,7 @@
 
 ## Demo 1
 Dr. Shalan's unisgned multiplier, found in "Lectures 19-21: RTL & ASM Charts" slide 5, was used while designing our circuit.
+The bassic concept of a binary to bcd converter was taken from the double_dabbble article on wikipedia https://en.wikipedia.org/wiki/Double_dabble.
 
 ### Control Signals:
 - LI => Loads the negative register and shift registers with their values simultaniously. It loads a zero to P register when it is High, else it gives the value of P + SHL_Register to register P.
@@ -21,3 +22,4 @@ Dr. Shalan's unisgned multiplier, found in "Lectures 19-21: RTL & ASM Charts" sl
 
 ## Demo 2
 Link to the signed multiplier Verilog code: https://cloudv.io/a/dd1_project (To be made public before we present).
+Double dabbler's sequential implmentation was used to produce the binary to BCD verilog code since the function was not on blackboard yet.
