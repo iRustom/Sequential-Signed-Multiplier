@@ -1,6 +1,6 @@
 // Detects a positive edge from an input
 
-// Copyright (C) 2023  omarelfouly
+// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -25,23 +25,21 @@ module risingEdgeDetector(clk, level, tick);
 
     reg [1:0] state, nextState;
     reg nextOut;
-    localparam [1:0] zero=2'b00, edge=2'b01, one=2'b10;//localparam is not supported by vivado
+    localparam [1:0] zero=2'b00, positiveEdge=2'b01, one=2'b10;//localparam is not supported by vivado
     
     always @ (level or state)
     case (state)
         zero: if (level==0) nextState = zero;
-            else nextState = edge;
-        edge: if (level==0) nextState = zero;
+            else nextState = positiveEdge;
+        positiveEdge: if (level==0) nextState = zero;
             else nextState = one;
         one: if (level==0) nextState = zero;
             else nextState = one;
         default: nextState = zero;
     endcase
     
-    always @ (posedge clk ) begin//or posedge rst
-        //if(rst) state <= A;
-        //else 
+    always @ (posedge clk ) begin
         state <= nextState;
     end
-    assign tick = (state==edge);
+    assign tick = (state==positiveEdge);
 endmodule

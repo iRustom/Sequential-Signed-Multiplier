@@ -1,6 +1,6 @@
 // Control unit for the circuit
 
-// Copyright (C) 2023  omarelfouly, iRustom
+// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -35,7 +35,7 @@ module controlUnit(clk,zeroFlag, LSB_SHRReg, buttonRight, buttonCenter, buttonLe
     initial 
     begin
         displayState = 2'b01;
-            calculatingFlag =0;
+        calculatingFlag =0;
     end
     
     localparam [1:0] right = 2'b01, middle = 2'b10, left = 2'b11;
@@ -53,12 +53,16 @@ module controlUnit(clk,zeroFlag, LSB_SHRReg, buttonRight, buttonCenter, buttonLe
             left: if(buttonRight) displayNextState = middle;
                   else displayNextState = left;
                   
+            default: displayNextState = right;
         endcase
     end
     
     always @(posedge clk)
     begin
-        displayState <= displayNextState;
+        if(load_Initial)
+            displayState <= right;
+        else
+            displayState <= displayNextState;
     end
     
     always @(posedge clk)

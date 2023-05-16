@@ -1,6 +1,6 @@
 // This program is equivlant to 4 multplexers with displayControlSignal being our selection line
 
-// Copyright (C) 2023  omarelfouly
+// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@ module display( displayControlSignal, bcdProduct, segBCD3, segBCD2, segBCD1);
   output reg [3:0] segBCD2;
   output reg [3:0] segBCD1;
   
-  localparam [1:0] start=2'b00, right=2'b01,middle=2'b10,left=2'b11;//localparam is not supported by vivado
+  localparam [1:0] start=2'b00, right=2'b01,middle=2'b10,left=2'b11;
   localparam [3:0] underScore = 4'b1111;
   
   always @(*)

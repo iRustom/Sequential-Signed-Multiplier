@@ -1,6 +1,6 @@
 // displays 3 digits and a sign, according to its inputs, on a basys 3 7segment display
 
-// Copyright (C) 2023  omarelfouly
+// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
