@@ -28,7 +28,7 @@ module SevenSegDisplay(inclk,segBCD3,segBCD2,segBCD1,product,negativeProductFlag
     
     wire [1:0] toggle;
     wire TOGClk;
-    clockDivider #(250000) TOGClkDiv(.clk(inclk),.rst(reset) ,.clk_out(TOGClk));
+    clockDivider #(50000) TOGClkDiv(.clk(inclk),.rst(reset) ,.clk_out(TOGClk));
     
     wire enOn = 1'b1;
     counterModN #(2,4) binCounter2 (.clk(TOGClk),.reset(rst),.en(enOn), .count(toggle));
