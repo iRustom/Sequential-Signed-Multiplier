@@ -1,6 +1,6 @@
-// Top module for sequentil multiplier circuit
+// Top module for sequential multiplier circuit
 
-// Copyright (C) 2023  omarelfouly, iRustom, bavlyRemon, omarAnwar
+// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -15,8 +15,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
-
-// file: circ.v
 
 
 module circ(inclk,inputButtonRight,inputButtonCenter,inputButtonLeft,inputMultiplier,inputMultiplicand,segments,anode_active,doneFlag);
@@ -69,7 +67,7 @@ module circ(inclk,inputButtonRight,inputButtonCenter,inputButtonLeft,inputMultip
     
     //produces control signals
     wire calculatingFlag;
-    controlUnit CU(.clk(clk),.zeroFlag(zeroFlag),.LSB_SHRReg(LSB_SHRReg),.buttonRight(buttonRight),.BTNC(buttonCenter),.buttonLeft(buttonLeft),.load_Initial(load_Initial),.displayControlSignal(displayControlSignal),.calculatingFlag(calculatingFlag));
+    controlUnit CU(.clk(clk),.zeroFlag(zeroFlag),.LSB_SHRReg(LSB_SHRReg),.buttonRight(buttonRight),.buttonCenter(buttonCenter),.buttonLeft(buttonLeft),.load_Initial(load_Initial),.displayControlSignal(displayControlSignal),.calculatingFlag(calculatingFlag));
     
     // tells us when we are done
     assign doneFlag = calculatingFlag & zeroFlag;

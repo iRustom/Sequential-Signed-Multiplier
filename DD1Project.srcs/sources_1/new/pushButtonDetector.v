@@ -1,6 +1,6 @@
 // Outputs a 1 for a single clock cycle when a button is pushed, "cleaning" the button input
 
-// Copyright (C) 2023  omarelfouly
+// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
