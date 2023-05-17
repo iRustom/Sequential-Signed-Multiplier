@@ -397,3 +397,160 @@ module SevenSegDisplay(inclk,segBCD3,segBCD2,segBCD1,product,negativeProductFlag
 endmodule 
 
 ```
+
+## FPGA specific code and other modules
+
+```SystemVerilog
+
+module clockDivider #(parameter n = 5000000)(clk,rst,clk_out);
+  input wire clk;
+  input wire rst;
+  output reg clk_out;
+
+  reg [31:0] count;
+  always @ (posedge clk, posedge rst) begin
+    if (rst == 1'b1) // Asynchronous Reset
+      count <= 32'b0;
+    else if (count == n-1)
+      count <= 32'b0;
+    else
+      count <= count + 1;
+  end
+  always @ (posedge clk, posedge rst) begin
+    if (rst) // Asynchronous Reset
+      clk_out <= 0;
+    else if (count == n-1)
+      clk_out <= ~ clk_out;
+    end
+endmodule
+
+```
+
+```SystemVerilog
+
+module pushButtonDetector( clk, rst, uncleanInput, cleanOutput);
+    input wire clk;
+    input wire rst;
+    input wire uncleanInput;
+    output wire cleanOutput;
+
+    wire newclk;
+    clockDivider #(5000) newclkDiv(.clk(clk),.rst(rst) ,.clk_out(newclk));
+    
+    wire postBounce; 
+    debouncer d(.clk(newclk),.rst(rst),.in(uncleanInput),.out(postBounce));
+    
+    wire postSynch;
+    synchronizer s(.clk(newclk),.sig(postBounce),.sig1(postSynch));
+    
+    risingEdgeDetector r(.clk(newclk), .level(postSynch),.tick(cleanOutput));
+    
+endmodule 
+
+```
+
+```SystemVerilog
+
+module debouncer(clk,rst,in,out);
+    input wire clk; 
+    input wire rst; 
+    input wire in;
+    output wire out;
+
+    reg q1,q2,q3;
+    always@(posedge clk, posedge rst) begin
+        if(rst == 1'b1) begin
+            q1 <= 0;
+            q2 <= 0;
+            q3 <= 0;
+        end
+        else begin
+            q1 <= in;
+            q2 <= q1;
+            q3 <= q2;
+        end
+    end
+    assign out = (rst) ? 0 : q1&q2&q3;
+    
+endmodule
+
+```
+
+```SystemVerilog
+
+module synchronizer( clk, sig, sig1);
+    input wire clk;
+    input wire sig;
+    output reg sig1;
+
+    reg meta;
+    always @(posedge clk)begin
+        meta <= sig;
+        sig1 <= meta;
+    end
+endmodule 
+
+```
+
+```SystemVerilog
+
+module risingEdgeDetector(clk, level, tick);
+    input wire clk;
+    input wire level;
+    output wire tick;
+
+    reg [1:0] state, nextState;
+    reg nextOut;
+    localparam [1:0] zero=2'b00, positiveEdge=2'b01, one=2'b10;//localparam is not supported by vivado
+    
+    always @ (level or state)
+    case (state)
+        zero: if (level==0) nextState = zero;
+            else nextState = positiveEdge;
+        positiveEdge: if (level==0) nextState = zero;
+            else nextState = one;
+        one: if (level==0) nextState = zero;
+            else nextState = one;
+        default: nextState = zero;
+    endcase
+    
+    always @ (posedge clk ) begin
+        state <= nextState;
+    end
+    assign tick = (state==positiveEdge);
+endmodule
+
+```
+
+```SystemVerilog
+
+module counterModN (clk,reset,en,count);
+    input clk;
+    input reset;
+    input en;
+    output reg [x-1:0] count;
+
+    //input clk, reset, en;
+    //output reg [x-1:0] count; 
+    parameter x=4, n=3;
+
+    always @(posedge clk or posedge reset) 
+    begin
+        if (reset)
+        begin 
+            count <= 0;
+        end else if(en) 
+        begin
+            if(count == n-1)
+            begin
+                count <= 0;
+            end else
+            begin 
+                count <= count + 1;
+            end
+        end
+    end
+    
+endmodule
+
+```
