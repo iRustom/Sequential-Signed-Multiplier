@@ -2,14 +2,14 @@
 ## Project members:
 - Ahmed Ali
 - Omar Elfouly
-- Bavly Remon
-- Omar Anwar
+- Bavly Labib
+- Omar Saleh
 ## Contribution
 
-Due to the complexity of this project no member ever worked alone. Every commit was done in pairs. A commit by OmarElfouly means it was done by Omar Elfouly and Bavly Remon, while any push commmited by iRustom was done by Ahmed Ali and Omar Anwar.
+Due to the complexity of this project no member ever worked alone. Every commit was done in pairs. A commit by OmarElfouly means it was done by Omar Elfouly and Bavly Remon, while any push commmited by iRustom was done by Ahmed Ali and Omar Saleh.
 A general outline of contribution is:
-- Demo 1 - Omar and Bavly mainly worked on combinational binary to BCD and magnitude finder, while Ahmed Ali and Omar Anwar worked on unsigned multiplier and display.
-- Demo 2 - Omar and Bavly mainly worked on multiplier, display, and circ. Ahmed Ali and Omar Anwar mainly worked on control unit and 7-segment display.
+- Demo 1 - Omar and Bavly mainly worked on combinational binary to BCD and magnitude finder, while Ahmed Ali and Omar Saleh worked on unsigned multiplier and display.
+- Demo 2 - Omar and Bavly mainly worked on multiplier, display, and circ. Ahmed Ali and Omar Saleh mainly worked on control unit and 7-segment display.
 - Demo 3 - All members improved readability of code and applied changes according to comments made by professor Shalan. All members then worked on Report and README.
 
 ## Demo 1
