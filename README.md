@@ -554,3 +554,21 @@ module counterModN (clk,reset,en,count);
 endmodule
 
 ```
+## Implmentation issues
+
+Sequential multiplier could be optimesed for speed by using an array of adders. Furthermore, its also possible to optimise for size by using an optimised signed baugh wooley multiplier.
+There currently exist no other known issues with our implmentation other than its below optimum speed and size.
+
+## Validation Activities
+
+A video demo showcasing all our test cases has been recorded. The video demo does the following operations:
+- 0 x 0
+- 0 x 4
+- 0 x -3
+- -3 x -5
+- 127 x 127
+- -128 x -128
+- -128 x 4
+- -128 x 127
+
+Our program has been flashed onto our FPGA which we will bring with us to present in class.
