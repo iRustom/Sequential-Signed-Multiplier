@@ -32,6 +32,8 @@ The following is our Report on our project.
 # Report on Sequential Signed Multiplier
 ## Magnitude Finder
 ### Block Diagram
+![magnitudeFinderBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/29846ec6-0d5d-443a-991a-48cdea03094e)
+
 The 2’s complementors take the two binary inputs, and convert them into their magnitude. The MUX chooses whether we take the 8 bits as they are, which is in the case the sign bit is 0, indicating the input is positive, or whether we take the 8 bits 2’s complement, which is in the case the sign bit is 1, indicating that it is negative, so complementing the negative value gives us its magnitude. The selection line is, therefore, the sign bit, if 1, we complement, if 0, we take the input as is.
 ### Logisim
 
@@ -40,6 +42,8 @@ The 2’s complementors take the two binary inputs, and convert them into their 
 ## Unsigned Sequential Multiplier
 
 ### Block Diagram
+![unsignedSequentialMultBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/b9fc6cd8-45ee-4129-a2ee-1d023ada2d76)
+
 The shift left register is of size 16 bits and takes the multiplicand. If shifting is enabled then on each positive edge of the clock, it shifts 1-bit to the left. The register’s first 8 bits are loaded with the input from the magnitude fixer and the last 8 bits are grounded , such that when the load initial signal is high the register is loaded with its initial values. These control signals are provided by the control unit which guarantees that shifting only occurs after input has been loaded.
 
 The shift right register is of size 8 bits and takes the multiplier. If shifting is enabled then on each positive edge of the clock, it shifts 1-bit to the right. The register’s 8 bits are loaded with the input from the magnitude fixer, such that when the load initial signal is high the register is loaded with its initial values. These control signals are provided by the control unit which guarantees that shifting only occurs after input has been loaded.
@@ -54,6 +58,8 @@ The control unit takes the buttons and b[0] and the z-flag of the left shift reg
 ## Negative Register
 
 ### Block Diagram
+![negBoolBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/625ac498-2791-42e4-991d-1b1a5000b948)
+
 The Neg Reg register loads the value of the sign, positive (0) or negative (1), into it, by XORing the sign bit of both inputs. This is necessary because we only want a 1 when exactly one of the inputs is negative and the other is positive, and a 0 if the signs are both the same, which implies an XOR gate. We used a register to store the value of the sign so that when the user is changing their inputs, it does not affect the sign bit on the 7-segment display, and this is done by disabling the load once the initial load of the inputs is complete, and only enabling it on a center button press.
 
 ### Logisim
@@ -63,6 +69,8 @@ The Neg Reg register loads the value of the sign, positive (0) or negative (1), 
 ## Binary to BCD
 
 ### Block Diagram
+![doubleDabbleBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/7f7c71bd-e279-42df-920f-3a08eba8666a)
+
 The double dabble function takes in the 16-bit binary product produced by the multiplier and uses combinational logic to convert that input into its 5x4-bit BCD equivalent, which is 20 bits, as each digit occupies 4-bits, and we have a total of 5 digits.
 ### Logisim
 
@@ -71,6 +79,8 @@ The double dabble function takes in the 16-bit binary product produced by the mu
 ## Display
 
 ### Block Diagram
+![displayBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/e77ac8dd-595a-4e28-83aa-5fce360dd4e9)
+
 The display function takes in the 20 BCD bits, and takes in the display select provided by the control unit, which decides which 3 digits to display on the 7 segment display.
 
 ### Logisim
@@ -80,6 +90,8 @@ The display function takes in the 20 BCD bits, and takes in the display select p
 ## 7 Segment function
 
 ## Block Diagram
+![7segBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/cc9d9668-2f6d-40c6-bf79-c1ba071afb0d)
+
 The 7-segment function takes the 3 BCD digits, and negative bool then decodes them into their corresponding 7-segment binary bits, which then drive the display on the board, and also produces the negative or positive sign on the board. The function also alternates between the displays on the board at a high enough frequency such that all 4 segments are apparent at the same time to the naked eye. The function also displays “_” in place of the digits before a multiplication takes place.
 
 ### Logisim
