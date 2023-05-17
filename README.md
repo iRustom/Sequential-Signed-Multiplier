@@ -21,7 +21,7 @@ The bassic concept of a binary to bcd converter was taken from the double_dabbbl
 - 7 segment function => takes the BCD digits provided by the Display and displays them on the three rightmost 7 segment displays on the FPGA, and takes the output of the Neg Reg, which contains information about whether or not the product is negative or not, and displays a negative sign on the leftmost 7 segment display if it is negative, nothing if not.
 
 ## Demo 2
-Link to the signed multiplier Verilog code: https://cloudv.io/a/dd1_project (To be made public before we present).
+Link to the signed multiplier Verilog code: https://cloudv.io/a/dd1_project (To be made public before we present)(Now outdated, please refer to the modules on this repo).
 Double dabbler's sequential implmentation was used to produce the binary to BCD verilog code since the function was not on blackboard yet.
 
 ## Demo 3
