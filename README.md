@@ -550,3 +550,4 @@ A video demo showcasing all our test cases has been recorded and uploaded to the
 - -128 x 127
 
 Our program has been flashed onto our FPGA which we will bring with us to present in class.
+Please refer to journal.md for detailed updates on our progress through the project
