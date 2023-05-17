@@ -563,7 +563,7 @@ endmodule
 ```
 ## Implmentation issues
 
-Sequential multiplier could be optimesed for speed by using an array of adders. Furthermore, its also possible to optimise for size by using an optimised signed baugh wooley multiplier.
+Sequential multiplier could be optimised for speed by using an array of adders. Furthermore, its also possible to optimise for size by using an optimised signed baugh wooley multiplier.
 There currently exist no other known issues with our implmentation other than its below optimum speed and size.
 
 ## Validation Activities
