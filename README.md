@@ -30,14 +30,30 @@ This inolved minor changes to the names and syntax of certain parts of our progr
 The following is our Report on our project.
 
 # Report on Sequential Signed Multiplier
+
 ## Magnitude Finder
+
 ### Block Diagram
 ![magnitudeFinderBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/29846ec6-0d5d-443a-991a-48cdea03094e)
 
 The 2’s complementors take the two binary inputs, and convert them into their magnitude. The MUX chooses whether we take the 8 bits as they are, which is in the case the sign bit is 0, indicating the input is positive, or whether we take the 8 bits 2’s complement, which is in the case the sign bit is 1, indicating that it is negative, so complementing the negative value gives us its magnitude. The selection line is, therefore, the sign bit, if 1, we complement, if 0, we take the input as is.
+
 ### Logisim
 
 ### Verilog
+
+```SystemVerilog
+module magnitudeFinder( circuitInput, magnitude);
+	input wire [7:0] circuitInput;
+	output wire [7:0] magnitude;
+
+	wire [7:0] twosComp;
+	assign twosComp = ~circuitInput +1'b1;
+	assign magnitude = (circuitInput[7]) ? twosComp : circuitInput[7:0];
+
+
+endmodule
+```
 
 ## Unsigned Sequential Multiplier
 
@@ -54,6 +70,57 @@ The control unit takes the buttons and b[0] and the z-flag of the left shift reg
 ### Logisim
 
 ### Verilog
+```SystemVerilog
+module multiplier( clk, inMC, inMP, load_Initial, zeroFlag, LSB_SHRReg, product);
+    input wire clk;
+    input wire [7:0] inMC;
+    input wire [7:0] inMP;
+    input wire load_Initial;
+    output wire zeroFlag;
+    output wire LSB_SHRReg;
+    output reg [15:0] product;
+    
+    reg [15:0] SHLReg;
+    reg [7:0] SHRReg;
+    reg [15:0] nextp;
+    
+    initial 
+    begin
+        SHLReg = 16'b0;
+        SHRReg = 8'b1;
+        product = 16'b0;
+    end
+    
+    always @(posedge clk)
+    begin
+    
+        if(load_Initial)
+        begin
+        
+        SHRReg <=inMP;
+        SHLReg[15:0] <={8'b0,inMC};
+        product <= 16'b0;
+        
+        end else
+        begin
+            
+            SHLReg <= SHLReg <<1;
+            SHRReg <= SHRReg >>1;
+            
+            if(LSB_SHRReg)
+            begin
+                product<= SHLReg+product; 
+            end
+        
+        end
+    end
+    
+    assign LSB_SHRReg = SHRReg[0];
+    assign zeroFlag = ~|SHRReg;
+
+endmodule
+
+```
 
 ## Negative Register
 
@@ -65,7 +132,24 @@ The Neg Reg register loads the value of the sign, positive (0) or negative (1), 
 ### Logisim
 
 ### Verilog
+```SystemVerilog
 
+module negativeBoolModule(clk,signBit0,signBit1, load_Initial, negativeProductFlag);
+    input wire clk;
+    input wire signBit0;
+    input wire signBit1;
+    input wire load_Initial;
+    output reg negativeProductFlag;
+    
+    
+    always @(posedge clk) begin
+      if(load_Initial)
+        negativeProductFlag <= signBit0  ^ signBit1 ;
+    end
+
+endmodule 
+
+```
 ## Binary to BCD
 
 ### Block Diagram
@@ -75,7 +159,25 @@ The double dabble function takes in the 16-bit binary product produced by the mu
 ### Logisim
 
 ### Verilog
+```SystemVerilog
 
+module binaryToBCD (binary, BCD);
+  input wire [15:0] binary; 
+  output reg [20:0] BCD;
+
+  integer i,j;
+  always @(binary) begin
+      BCD = 21'b0;
+      BCD[15:0] = binary;
+      for(i = 0; i <= 12; i = i+1)
+        for(j = 0; j <= i/3; j = j+1)
+          if (BCD[16-i+4*j -: 4] > 4)
+            BCD[16-i+4*j -: 4] = BCD[16-i+4*j -: 4] + 4'd3;
+  end
+
+endmodule
+
+```
 ## Display
 
 ### Block Diagram
@@ -86,7 +188,46 @@ The display function takes in the 20 BCD bits, and takes in the display select p
 ### Logisim
 
 ### Verilog
+```SystemVerilog
 
+module display( displayControlSignal, bcdProduct, segBCD3, segBCD2, segBCD1);
+  input wire [1:0]displayControlSignal;
+  input wire [19:0]bcdProduct;
+  output reg [3:0] segBCD3;
+  output reg [3:0] segBCD2;
+  output reg [3:0] segBCD1;
+  
+  localparam [1:0] start=2'b00, right=2'b01,middle=2'b10,left=2'b11;
+  localparam [3:0] underScore = 4'b1111;
+  
+  always @(*)
+  begin
+    case(displayControlSignal)
+      start: begin
+        segBCD1 = underScore;
+        segBCD2 = underScore;
+        segBCD3 = underScore;
+      end
+      right: begin
+        segBCD1 = bcdProduct[3:0];
+        segBCD2 = bcdProduct[7:4];
+        segBCD3 = bcdProduct[11:8];
+      end
+      middle: begin
+        segBCD1 = bcdProduct[7:4];
+        segBCD2 = bcdProduct[11:8];
+        segBCD3 = bcdProduct[15:12];
+      end
+      left: begin
+        segBCD1 = bcdProduct[11:8];
+        segBCD2 = bcdProduct[15:12];
+        segBCD3 = bcdProduct[19:16];
+      end
+    endcase
+  end
+endmodule
+
+```
 ## 7 Segment function
 
 ## Block Diagram
@@ -97,3 +238,69 @@ The 7-segment function takes the 3 BCD digits, and negative bool then decodes th
 ### Logisim
 
 ### Verilog
+```SystemVerilog
+
+module SevenSegDisplay(inclk,segBCD3,segBCD2,segBCD1,product,negativeProductFlag,anode_active,segments);
+    input wire inclk;
+    input wire [3:0] segBCD3;
+    input wire [3:0] segBCD2;
+    input wire [3:0] segBCD1;
+    input wire [13:0] product;
+    input wire negativeProductFlag;
+    output reg [3:0] anode_active;
+    output reg [6:0] segments;
+    
+    wire [1:0] toggle;
+    wire TOGClk;
+    clockDivider #(50000) TOGClkDiv(.clk(inclk),.rst(reset) ,.clk_out(TOGClk));
+    
+    wire enOn = 1'b1;
+    counterModN #(2,4) binCounter2 (.clk(TOGClk),.reset(rst),.en(enOn), .count(toggle));
+    
+    reg [3:0] numToDisplay;
+    
+    localparam [3:0]  nothing = 4'b1101, negative =4'b1110, underscore = 4'b1111;
+    
+    always @(*)
+    begin
+      case(toggle)
+        0: numToDisplay <= segBCD1;
+        1: numToDisplay <= segBCD2;
+        2: numToDisplay <= segBCD3;
+        3:begin
+            if(product==0)numToDisplay <=nothing;// to prevent -0
+            else numToDisplay <= negativeProductFlag? negative : nothing;
+        end
+      endcase 
+    end
+    always @(*) begin
+        case(toggle)
+            2'b00: anode_active = 4'b1110;
+            2'b01: anode_active = 4'b1101;
+            2'b10: anode_active = 4'b1011;
+            2'b11: anode_active = 4'b0111;
+        endcase
+    end
+    always @(*) begin
+            
+      case(numToDisplay )
+        0: segments = 7'b0000001;
+        1: segments = 7'b1001111;
+        2: segments = 7'b0010010;
+        3: segments = 7'b0000110;
+        4: segments = 7'b1001100;
+        5: segments = 7'b0100100;
+        6: segments = 7'b0100000;
+        7: segments = 7'b0001111;
+        8: segments = 7'b0000000;
+        9: segments = 7'b0000100;
+        nothing: segments =7'b1111111;
+        negative: segments =7'b1111110;
+        underscore: segments =7'b1110111;
+        default: segments=7'b1110111;
+      endcase
+      
+    end
+endmodule 
+
+```
