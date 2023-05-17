@@ -561,7 +561,7 @@ There currently exist no other known issues with our implmentation other than it
 
 ## Validation Activities
 
-A video demo showcasing all our test cases has been recorded. The video demo does the following operations:
+A video demo showcasing all our test cases has been recorded and uploaded to the repo. The video demo does the following operations:
 - 0 x 0
 - 0 x 4
 - 0 x -3
