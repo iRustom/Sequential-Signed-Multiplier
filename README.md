@@ -25,11 +25,11 @@ The bassic concept of a binary to bcd converter was taken from the double_dabbbl
 ### Black boxes:
 - Double dabble => it's a function that converts a binary value into its BCD equivalent. In our case it converts 16 bits into 5x4bit BCD thats then passed on to the display function. It has been implmented using combinational logic.
 - Display => function that chooses which BCD digits to display based on the control signal DS. In our case it chooses 3x4bit BCD from the total 5x4bit BCD provided from the double dabble. It will output 12'b1 if ds is in dash state else it will output the BCD values to be displayed. 
-- 7-segment function => takes the BCD digits provided by the Display and displays them on the three rightmost 7 segment displays on the FPGA, and takes the output of the Neg Reg, which contains information about whether or not the product is negative or not, and displays a negative sign on the leftmost 7 segment display if it is negative, nothing if not.
+- 7-segment function => takes the BCD digits provided by the Display and displays them on the three rightmost 7 segment displays on the FPGA, and takes the output of the Neg Reg, which contains information about whether or not the product is negative or not, and displays a negative sign on the leftmost 7-segment display if it is negative, nothing if not.
 
 ## Demo 2
 Link to the signed multiplier Verilog code: https://cloudv.io/a/dd1_project (To be made public before we present)(Now outdated, please refer to the modules on this repo and in source files).
-Double dabbler's sequential implmentation was used to produce the binary to BCD verilog code since the function was not on blackboard yet.
+Double dabbler's sequential implmentation was used to produce the binary to BCD verilog code since the function was not on Blackboard yet.
 
 ## Demo 3
 This inolved minor changes to the names and syntax of certain parts of our program. We also added license information.
