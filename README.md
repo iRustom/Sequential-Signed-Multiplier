@@ -59,6 +59,7 @@ endmodule
 ## Unsigned Sequential Multiplier
 
 ### Block Diagram
+
 ![unsignedSequentialMultBlock](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/b9fc6cd8-45ee-4129-a2ee-1d023ada2d76)
 
 The shift left register is of size 16 bits and takes the multiplicand. If shifting is enabled then on each positive edge of the clock, it shifts 1-bit to the left. The register’s first 8 bits are loaded with the input from the magnitude fixer and the last 8 bits are grounded , such that when the load initial signal is high the register is loaded with its initial values. These control signals are provided by the control unit which guarantees that shifting only occurs after input has been loaded.
@@ -68,12 +69,15 @@ The shift right register is of size 8 bits and takes the multiplier. If shifting
 Register P can be considered an accumulator that either keeps its value or keeps its value plus the value of the shift left register. The mux chooses whether the input into the product register is 0, or is the accumulated adder which adds the left shift register along with the product. The decision to load is then controlled by b[0] (Which is the least significant bit of the shift right register), such that when b[0] is 1, we load the input into the product register, and when it is 0 we do not load anything. The control signals Li (bar) and LP are such that when the button is pressed, we load 0 into the product, if it is not pressed, then we load only when b[0] == 1.
 
 The control unit takes the buttons and b[0] and the z-flag of the left shift register as inputs. It produces the Li, which is dependent on the BTNC being clicked, and produces LP, which is dependent on BTNC and b[0] to determine whether we load the Register P or not. It also produces the display select, which uses a finite state machine that alternates between three states, and state changes are dependent on BTNR and BTNL, determining which digits are to be displayed (rightmost, middle, leftmost), hence, scrolling through the output product. 
+
 ### Logisim
+
 ![seqMultLog](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/1da20a83-c998-46cc-91b7-c1635c1406be)
 
 ![image](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/80c37205-2b42-4b9a-946b-1ee6ff9db0b1)
 
 ### Verilog
+
 ```SystemVerilog
 module multiplier( clk, inMC, inMP, load_Initial, zeroFlag, LSB_SHRReg, product);
     input wire clk;
@@ -122,6 +126,76 @@ module multiplier( clk, inMC, inMP, load_Initial, zeroFlag, LSB_SHRReg, product)
     assign LSB_SHRReg = SHRReg[0];
     assign zeroFlag = ~|SHRReg;
 
+endmodule
+
+```
+
+```SystemVerilog
+
+module controlUnit(clk,zeroFlag, LSB_SHRReg, buttonRight, buttonCenter, buttonLeft, load_Initial, displayControlSignal, calculatingFlag);
+    input wire clk;
+    input wire zeroFlag;
+    input wire LSB_SHRReg; 
+    input wire buttonRight; 
+    input wire buttonCenter; 
+    input wire buttonLeft;
+    output reg load_Initial;
+    output wire [1:0] displayControlSignal;
+    output reg calculatingFlag;
+
+
+    reg [1:0] displayNextState;
+    reg [1:0] displayState;
+    //reg calculatingFlag;
+    
+    initial 
+    begin
+        displayState = 2'b01;
+        calculatingFlag =0;
+    end
+    
+    localparam [1:0] right = 2'b01, middle = 2'b10, left = 2'b11;
+    
+    always @(*)
+    begin
+        case(displayState)
+            right: if(buttonLeft) displayNextState = middle;
+                   else displayNextState = right;
+
+            middle: if(buttonLeft) displayNextState = left;
+                    else if(buttonRight) displayNextState = right;
+                    else displayNextState = middle;
+
+            left: if(buttonRight) displayNextState = middle;
+                  else displayNextState = left;
+                  
+            default: displayNextState = right;
+        endcase
+    end
+    
+    always @(posedge clk)
+    begin
+        if(load_Initial)
+            displayState <= right;
+        else
+            displayState <= displayNextState;
+    end
+    
+    always @(posedge clk)
+    begin
+        load_Initial <= buttonCenter;
+    end
+    
+    always @(posedge clk)
+    begin
+            if(buttonCenter)
+            begin
+                calculatingFlag <= 1; 
+            end
+    end
+    
+    assign displayControlSignal = (calculatingFlag&zeroFlag & ~buttonCenter) ? displayState : 2'b00;
+    
 endmodule
 
 ```
