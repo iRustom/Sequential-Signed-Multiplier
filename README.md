@@ -4,6 +4,13 @@
 - Omar Elfouly
 - Bavly Remon
 - Omar Anwar
+## Contribution
+
+Due to the complexity of this project no member ever worked alone. Every commit was done in pairs. A commit by omarelfouly means it was done by Omar Elfouly and Bavly Remon, while any push commmited by iRustom was done by Ahmed Ali and Omar Anwar.
+A general outline of contribution is:
+- Demo 1 - Omar and Bavly mainly worked on combinational binary to bcd and magnitude finder, while Ahmed Ali and Omar Anwar worked on unsigned multiplier and display
+- Demo 2 - Omar and Bavly mainly worked on multiplier, display, and circ. Ahmed Ali and Omar Anwar mainly worked on control unit and 7 segment display
+- Demo 3 - All members improved readability of code and applied changes according to comments made by professor Shalan. All members then worked on Report and README
 
 ## Demo 1
 Dr. Shalan's unisgned multiplier, found in "Lectures 19-21: RTL & ASM Charts" slide 5, was used while designing our circuit.
@@ -21,7 +28,7 @@ The bassic concept of a binary to bcd converter was taken from the double_dabbbl
 - 7 segment function => takes the BCD digits provided by the Display and displays them on the three rightmost 7 segment displays on the FPGA, and takes the output of the Neg Reg, which contains information about whether or not the product is negative or not, and displays a negative sign on the leftmost 7 segment display if it is negative, nothing if not.
 
 ## Demo 2
-Link to the signed multiplier Verilog code: https://cloudv.io/a/dd1_project (To be made public before we present)(Now outdated, please refer to the modules on this repo).
+Link to the signed multiplier Verilog code: https://cloudv.io/a/dd1_project (To be made public before we present)(Now outdated, please refer to the modules on this repo and in source files).
 Double dabbler's sequential implmentation was used to produce the binary to BCD verilog code since the function was not on blackboard yet.
 
 ## Demo 3
