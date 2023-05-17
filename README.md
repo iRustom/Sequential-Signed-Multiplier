@@ -75,7 +75,7 @@ The control unit takes the buttons and b[0] and the z-flag of the left shift reg
 Data path:
 ![seqMultLog](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/1da20a83-c998-46cc-91b7-c1635c1406be)
 
-Control unit;
+Control unit:
 ![image](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/80c37205-2b42-4b9a-946b-1ee6ff9db0b1)
 
 ### Verilog
