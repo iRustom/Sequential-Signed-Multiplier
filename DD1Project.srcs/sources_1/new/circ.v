@@ -50,11 +50,8 @@ module circ(inclk,inputButtonRight,inputButtonCenter,inputButtonLeft,inputMultip
     magnitudeFinder MCMagnitudeFinder(.circuitInput(inputMultiplicand),.magnitude(magnitudeMC));
     
     //Sign of the product is stored in the negative bool flag
-    reg negativeProductFlag;
-    always @(posedge clk) begin
-      if(load_Initial)
-      negativeProductFlag <= inputMultiplier[7] ^ inputMultiplicand[7];
-    end
+    wire negativeProductFlag;
+    negativeBoolModule(.clk(clk),.signBit0(inputMultiplier[7]),.signBit1(inputMultiplicand[7]), .load_Initial(load_Initial), .negativeProductFlag(negativeProductFlag));
     
     wire load_Initial;
     wire zeroFlag; 
