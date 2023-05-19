@@ -1,6 +1,6 @@
 // program to produce a clock with a different frequency
 
-// Credit to Digital Design 1 Lab at the American University in Cairo for the following code
+// Credit to Digital Design 1 Lab at The American University in Cairo for the following code
 
 module clockDivider #(parameter n = 5000000)(clk,rst,clk_out);
   input wire clk;

@@ -2,7 +2,7 @@
 
 // Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
 
-// Credit to Digital design 1 lab at the Amrican University in Cairo for the following code
+// Credit to Digital Design 1 Lab at The American University in Cairo for the following code
 
 module risingEdgeDetector(clk, level, tick);
     input wire clk;
