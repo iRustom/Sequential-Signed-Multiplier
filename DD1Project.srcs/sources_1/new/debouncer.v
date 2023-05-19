@@ -1,6 +1,6 @@
 // Program to debounce and synchronize an asynchronus signal
 
-// Credit to Digital design 1 lab at the Amrican University in Cairo for the following code
+// Credit to Digital Design 1 Lab at The American University in Cairo for the following code
 
 
 module debouncer(clk,rst,in,out);
