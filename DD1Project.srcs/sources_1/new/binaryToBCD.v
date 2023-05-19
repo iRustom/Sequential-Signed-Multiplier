@@ -15,7 +15,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-// Since the Verilog code for a binary to BCD converter has yet to be uploaded we used an online version
+// Since the Verilog code for a binary to BCD converter has yet to be uploaded we used an online version to inspire our code
 // Credit to https://en.wikipedia.org/wiki/Double_dabble
 
 module binaryToBCD (binary, BCD);
