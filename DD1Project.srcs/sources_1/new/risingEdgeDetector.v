@@ -1,7 +1,5 @@
 // Detects a positive edge from an input
 
-// Copyright (C) 2023  OmarElfouly, iRustom, BavlyRemon, omaranwar1
-
 // Credit to Digital Design 1 Lab at The American University in Cairo for the following code
 
 module risingEdgeDetector(clk, level, tick);
