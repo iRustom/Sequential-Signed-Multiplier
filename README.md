@@ -1,13 +1,46 @@
 # Digital Design I - Project II - Sequential Signed Multiplier
+
+## How to use and run the project
+
+### Block Diagram
+
+There exist two ways to view the block diagram:
+
+- Option one is to download BlockDiagram/BlockDiagram.drawio file and open it using the draw.io's desktop application or by opening it on [draw.io](https://app.diagrams.net/).
+- Option two is to view the BlockDiagram/BlockDiagram.drawio file using Github's website then copy and paste the code into [draw.io](https://app.diagrams.net/)
+
+### Logisim Circuit
+
+1. Download the file LogisimCircuit/CircuitProject.circ
+2. Open the file using [Logisim-evolution](https://github.com/logisim-evolution/logisim-evolution).
+
+### How to program Basys3 FPGA board with Project
+
+1. On a desktop download FPGASources
+2. Create a new project on Vivado
+3. Select RTL Project then click next
+4. Add all files in FPGASources/VerilogSources as sources
+5. Add all files in FPGASources/Basys3Constraints as constraints
+6. Select Basys3 Board
+7. Click Run Synthesis, then click OK
+8. Click Run Implmentation, then click OK
+9. Click Generate bitstream, then click OK
+10. Plug in Basys3
+11. Click Open Hardware Manager, then click OK
+12. Then click open target -> Auto Connect
+13. Click on Program Device, then select your FPGA
+14. Make sure the circ.bit file is selected then click Program
+15. The FPGA is now programmed.
+
 ## Project members:
 - Ahmed Ali
 - Omar Elfouly
-- Bavly Labib
+- Bavly Labieb
 - Omar Saleh
 
 ## Contribution
 
-Due to the complexity of this project no member ever worked alone. Every commit was done in pairs. A commit by OmarElfouly means it was done by Omar Elfouly and Bavly Remon, while any push commmited by iRustom was done by Ahmed Ali and Omar Saleh.
+Due to the complexity of this project no member ever worked alone. Every commit was done in pairs. A commit by OmarElfouly means it was done by Omar Elfouly and Bavly Labieb, while any push commmited by iRustom was done by Ahmed Ali and Omar Saleh.
 A general outline of contribution is:
 - Demo 1 - Omar and Bavly mainly worked on combinational binary to BCD and magnitude finder, while Ahmed Ali and Omar Saleh worked on unsigned multiplier and display.
 - Demo 2 - Omar and Bavly mainly worked on multiplier, display, and circ. Ahmed Ali and Omar Saleh mainly worked on control unit and 7-segment display.
@@ -540,10 +573,20 @@ module counterModN (clk,reset,en,count);
 endmodule
 
 ```
-## Implmentation issues
 
-Sequential multiplier could be optimised for speed by using an array of adders. Furthermore, its also possible to optimise for size by using an optimised signed baugh wooley multiplier.
-There currently exist no other known issues with our implmentation other than its below optimum speed and size.
+## Implmentation Analysis
+
+![image](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/69a86e9e-df31-4bd9-bfc2-5c758c92d0d9)
+
+Above you can see how many LUTs our program uses, which is 238.
+
+![image](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/be3c53b8-5b48-47b7-b1df-54cc50fb7f0e)
+
+The critical path of our circuit is 16.581 ns.
+
+Sequential multiplier could be optimised for speed by using an array of adders. Furthermore, its also possible to optimise for size by using an optimised signed Baugh-Wooley multiplier.
+
+LED0 was an issue due to the multiplication ending too fast which made the led redundant since it turns off and on too fast for the human eye to notice.
 
 ## Validation Activities
 
@@ -557,5 +600,5 @@ A video demo showcasing all our test cases has been recorded and uploaded to the
 - -128 x 4
 - -128 x 127
 
-Our program has been flashed onto our FPGA which we will bring with us to present in class.
-Please refer to journal.md for detailed updates on our progress through the project
+Our program has been flashed onto our FPGA which we will bring with us to present.
+Please refer to journal.md for updates on our progress through the project.
