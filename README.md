@@ -582,7 +582,7 @@ Above you can see how many LUTs our program uses, which is 238.
 
 ![image](https://github.com/iRustom/Sequential-Signed-Multiplier/assets/98827931/be3c53b8-5b48-47b7-b1df-54cc50fb7f0e)
 
-The critical path of our circuit is 16.81 ns.
+The critical path of our circuit is 16.581 ns.
 
 Sequential multiplier could be optimised for speed by using an array of adders. Furthermore, its also possible to optimise for size by using an optimised signed Baugh-Wooley multiplier.
 
