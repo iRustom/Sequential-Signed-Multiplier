@@ -51,7 +51,7 @@ module circ(inclk,inputButtonRight,inputButtonCenter,inputButtonLeft,inputMultip
     
     //Sign of the product is stored in the negative bool flag
     wire negativeProductFlag;
-    negativeBoolModule(.clk(clk),.signBit0(inputMultiplier[7]),.signBit1(inputMultiplicand[7]), .load_Initial(load_Initial), .negativeProductFlag(negativeProductFlag));
+    negativeBoolModule SignFlagModule(.clk(clk),.signBit0(inputMultiplier[7]),.signBit1(inputMultiplicand[7]), .load_Initial(load_Initial), .negativeProductFlag(negativeProductFlag));
     
     wire load_Initial;
     wire zeroFlag; 
