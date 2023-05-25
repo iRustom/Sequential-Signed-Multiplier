@@ -18,9 +18,10 @@
 // Since the Verilog code for a binary to BCD converter has yet to be uploaded we used an online version to inspire our code
 // Credit to https://en.wikipedia.org/wiki/Double_dabble
 
-module binaryToBCD (binary, BCD);
+module binaryToBCD (binary, BCDOutput);
   input wire [15:0] binary; 
-  output reg [20:0] BCD;
+  output wire [19:0] BCDOutput;
+  reg [20:0] BCD;
 
   integer i,j;
   always @(binary) begin
@@ -31,5 +32,7 @@ module binaryToBCD (binary, BCD);
           if (BCD[16-i+4*j -: 4] > 4)
             BCD[16-i+4*j -: 4] = BCD[16-i+4*j -: 4] + 4'd3;
   end
+  
+  assign BCDOutput = BCD [19:0];
 
 endmodule

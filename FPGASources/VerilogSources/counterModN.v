@@ -17,6 +17,8 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 module counterModN (clk,reset,en,count);
+
+    parameter x=4, n=3;
     input clk;
     input reset;
     input en;
@@ -24,7 +26,6 @@ module counterModN (clk,reset,en,count);
 
     //input clk, reset, en;
     //output reg [x-1:0] count; 
-    parameter x=4, n=3;
 
     always @(posedge clk or posedge reset) 
     begin

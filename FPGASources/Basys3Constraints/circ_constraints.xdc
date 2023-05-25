@@ -22,9 +22,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {anode_active[1]}]
 set_property PACKAGE_PIN U2 [get_ports {anode_active[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {anode_active[0]}]
 
-set_property PACKAGE_PIN L1 [get_ports BTNC]
-set_property IOSTANDARD LVCMOS33 [get_ports BTNC]
-
 set_property PACKAGE_PIN T17 [get_ports inputButtonRight]
 set_property IOSTANDARD LVCMOS33 [get_ports inputButtonRight]
 

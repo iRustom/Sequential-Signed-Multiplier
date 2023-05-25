@@ -51,20 +51,21 @@ module circ(inclk,inputButtonRight,inputButtonCenter,inputButtonLeft,inputMultip
     
     //Sign of the product is stored in the negative bool flag
     wire negativeProductFlag;
+    wire load_Initial;
+
     negativeBoolModule SignFlagModule(.clk(clk),.signBit0(inputMultiplier[7]),.signBit1(inputMultiplicand[7]), .load_Initial(load_Initial), .negativeProductFlag(negativeProductFlag));
     
-    wire load_Initial;
     wire zeroFlag; 
     wire LSB_SHRReg;
     wire [1:0] displayControlSignal; // Display is a control signal
     
     //product stores the magnitude of product in binary produced by multiplier
     wire [15:0] product;
-    multiplier mult(.clk(clk),.inMP(magnitudeMP),.inMC(magnitudeMC),.load_Initial(load_Initial),.zeroFlag(zeroFlag),.LSB_SHRReg(LSB_SHRReg),.product(product));
+    multiplier mult(.clk(clk),.inMP(magnitudeMP),.inMC(magnitudeMC),.load_Initial(load_Initial),.zeroFlag(zeroFlag),.product(product));
     
     //produces control signals
     wire calculatingFlag;
-    controlUnit CU(.clk(clk),.zeroFlag(zeroFlag),.LSB_SHRReg(LSB_SHRReg),.buttonRight(buttonRight),.buttonCenter(buttonCenter),.buttonLeft(buttonLeft),.load_Initial(load_Initial),.displayControlSignal(displayControlSignal),.calculatingFlag(calculatingFlag));
+    controlUnit CU(.clk(clk),.zeroFlag(zeroFlag),.buttonRight(buttonRight),.buttonCenter(buttonCenter),.buttonLeft(buttonLeft),.load_Initial(load_Initial),.displayControlSignal(displayControlSignal),.calculatingFlag(calculatingFlag));
     
     // tells us when we are done
     assign doneFlag = calculatingFlag & zeroFlag;
@@ -72,7 +73,7 @@ module circ(inclk,inputButtonRight,inputButtonCenter,inputButtonLeft,inputMultip
     //converts binary product to BCD
     
     wire [19:0] bcdProduct;
-    binaryToBCD binaryToBCDCirc(.binary(product),.BCD(bcdProduct));
+    binaryToBCD binaryToBCDCirc(.binary(product),.BCDOutput(bcdProduct));
     
     //Contols what digit is displayed on each segment using displayControlSignal
     wire [3:0] segBCD3,segBCD2,segBCD1;

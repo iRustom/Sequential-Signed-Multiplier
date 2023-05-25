@@ -17,19 +17,19 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
-module multiplier( clk, inMC, inMP, load_Initial, zeroFlag, LSB_SHRReg, product);
+module multiplier( clk, inMC, inMP, load_Initial, zeroFlag, product);
     input wire clk;
     input wire [7:0] inMC;
     input wire [7:0] inMP;
     input wire load_Initial;
     output wire zeroFlag;
-    output wire LSB_SHRReg;
     output reg [15:0] product;
     
     reg [15:0] SHLReg;
     reg [7:0] SHRReg;
     reg [15:0] nextp;
-    
+    wire LSB_SHRReg;
+
     initial 
     begin
         SHLReg = 16'b0;

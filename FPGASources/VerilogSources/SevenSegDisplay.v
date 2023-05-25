@@ -21,17 +21,18 @@ module SevenSegDisplay(inclk,segBCD3,segBCD2,segBCD1,product,negativeProductFlag
     input wire [3:0] segBCD3;
     input wire [3:0] segBCD2;
     input wire [3:0] segBCD1;
-    input wire [13:0] product;
+    input wire [15:0] product;
     input wire negativeProductFlag;
     output reg [3:0] anode_active;
     output reg [6:0] segments;
     
     wire [1:0] toggle;
     wire TOGClk;
-    clockDivider #(50000) TOGClkDiv(.clk(inclk),.rst(reset) ,.clk_out(TOGClk));
+    wire constantZero = 1'b0;
+    clockDivider #(50000) TOGClkDiv(.clk(inclk),.rst(constantZero) ,.clk_out(TOGClk));
     
     wire enOn = 1'b1;
-    counterModN #(2,4) binCounter2 (.clk(TOGClk),.reset(rst),.en(enOn), .count(toggle));
+    counterModN #(2,4) binCounter2 (.clk(TOGClk),.reset(constantZero),.en(enOn), .count(toggle));
     
     reg [3:0] numToDisplay;
     

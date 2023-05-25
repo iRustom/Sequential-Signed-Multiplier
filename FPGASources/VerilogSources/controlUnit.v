@@ -16,10 +16,9 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-module controlUnit(clk,zeroFlag, LSB_SHRReg, buttonRight, buttonCenter, buttonLeft, load_Initial, displayControlSignal, calculatingFlag);
+module controlUnit(clk,zeroFlag, buttonRight, buttonCenter, buttonLeft, load_Initial, displayControlSignal, calculatingFlag);
     input wire clk;
     input wire zeroFlag;
-    input wire LSB_SHRReg; 
     input wire buttonRight; 
     input wire buttonCenter; 
     input wire buttonLeft;
@@ -30,7 +29,6 @@ module controlUnit(clk,zeroFlag, LSB_SHRReg, buttonRight, buttonCenter, buttonLe
 
     reg [1:0] displayNextState;
     reg [1:0] displayState;
-    //reg calculatingFlag;
     
     initial 
     begin
